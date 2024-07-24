@@ -1,0 +1,9 @@
+<div>
+  <%= form.label name, style: "display: block" %>
+  <%= form.text_field name %>
+  <% if errors.any? %>
+    <% errors.each do |e| %>
+      <p style="color: red"><%= e %></p>
+    <% end %>
+  <% end %>
+</div>
