@@ -1,0 +1,10 @@
+<%= form_with(model: @product) do |form| %>
+  <% %i(code name price).each do |name| %>
+    <%= render "shared/text_field", form:, name:, type: "text", errors: @product.errors[name] %>
+  <% end %>
+
+  <div class="pt-2">
+    <%= form.submit "Save", class: "btn btn-primary" %>
+    <%= link_to "Cancel", products_path, class: "btn btn-secondary" %>
+  </div>
+<% end %>
