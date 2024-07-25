@@ -38,6 +38,16 @@ class ProductsControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to edit_product_path(Product.last.id)
   end
 
+  test "create fails" do
+    product = build(:product).attributes.merge(code: nil)
+
+    assert_no_difference -> { Product.count } do
+      post products_path, params: { product: }
+    end
+
+    assert_template :new
+  end
+
   test "update" do
     product = create(:product)
     new_code = "PR-123"
@@ -47,6 +57,14 @@ class ProductsControllerTest < ActionDispatch::IntegrationTest
     product.reload
     assert product.code, new_code
     assert_redirected_to edit_product_path(product)
+  end
+
+  test "update fails" do
+    product = create(:product)
+
+    put product_path(product), params: { product: { code: nil } }
+
+    assert_template :edit
   end
 
   test "destroy" do

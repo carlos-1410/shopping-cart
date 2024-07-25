@@ -1,0 +1,21 @@
+<div class="row">
+  <div class="col-6">
+    <h1>Pricing rules</h1>
+  </div>
+  <div class="col-6">
+    <%= link_to "Add new", new_pricing_rule_path(@product), class: "btn btn-success mt-2 mr-2 float-right" %>
+  </div>
+</div>
+<hr/>
+<table class="w-100">
+  <tr>
+        <th><strong>Discount type</strong></th>
+        <th><strong>Minimum item quantity</strong></th>
+        <th><strong>Discount amount</strong></th>
+        <th><strong>Status</strong></th>
+        <th class="text-center"><strong>Actions</strong></th>
+  </tr>
+  <% product.pricing_rules.each do |pricing_rule| %>
+    <%= render "pricing_rule", pricing_rule: %>
+  <% end %>
+</table>
