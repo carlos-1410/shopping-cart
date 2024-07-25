@@ -5,4 +5,11 @@
   <td class="d-flex justify-content-center">
     <%= link_to "Edit", edit_product_path(product.id), class: "btn btn-sm btn-secondary mr-1" %>
   </td>
+  <td>
+    <%= form_with(url: add_to_cart_path) do |f| %>
+      <%= f.hidden_field :product_id, value: product.id %>
+      <%= f.number_field :quantity, value: 0 %>
+      <%= f.submit "Add to cart", class: "btn btn-primary" %>
+    <% end %>
+  </td>
 </tr>

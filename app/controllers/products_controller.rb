@@ -20,7 +20,7 @@ class ProductsController < ApplicationController
       if @product.save
         format.html { redirect_to edit_product_path(@product) }
       else
-        format.html { render :new }
+        format.html { render :new, status: :unprocessable_entity }
       end
     end
   end
@@ -29,10 +29,11 @@ class ProductsController < ApplicationController
     respond_to do |format|
       if product.update(product_attributes)
         format.html do
-          redirect_to edit_product_path(product), notice: "Product was successfully updated."
+          redirect_to edit_product_path(product),
+                      flash: { notice: "Product was successfully updated." }
         end
       else
-        format.html { render :edit }
+        format.html { render :edit, status: :unprocessable_entity }
       end
     end
   end
@@ -40,7 +41,10 @@ class ProductsController < ApplicationController
   def destroy
     respond_to do |format|
       if product.destroy
-        format.html { redirect_to products_path, notice: "Product was successfully destroyed." }
+        format.html do
+          redirect_to products_path,
+                      flash: { notice: "Product was successfully destroyed." }
+        end
       end
     end
   end

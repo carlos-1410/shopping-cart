@@ -43,9 +43,9 @@ class ProductsControllerTest < ActionDispatch::IntegrationTest
 
     assert_no_difference -> { Product.count } do
       post products_path, params: { product: }
+      assert_response :unprocessable_entity
+      assert_template :new
     end
-
-    assert_template :new
   end
 
   test "update" do
@@ -64,6 +64,7 @@ class ProductsControllerTest < ActionDispatch::IntegrationTest
 
     put product_path(product), params: { product: { code: nil } }
 
+    assert_response :unprocessable_entity
     assert_template :edit
   end
 
