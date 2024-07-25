@@ -3,8 +3,6 @@
 module ApplicationHelper
   def discount_amount(pricing_rule)
     case pricing_rule.discount_type
-    when PricingRule::BUY_ONE_GET_ONE_FREE_DISCOUNT
-      "n/a"
     when PricingRule::PERCENTAGE_DISCOUNT
       "#{pricing_rule.discount_amount}%"
     when PricingRule::PRICE_DISCOUNT
@@ -19,7 +17,7 @@ module ApplicationHelper
     when PricingRule::BUY_ONE_GET_ONE_FREE_DISCOUNT
       "n/a"
     else
-      pricing_rule.min_amount
+      pricing_rule.min_quantity
     end
   end
 end

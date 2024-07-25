@@ -6,17 +6,17 @@ PricingRule.find_or_create_by!(
   discount_type: PricingRule::BUY_ONE_GET_ONE_FREE_DISCOUNT,
   status: PricingRule::ACTIVE_STATUS,
   product: green_tea
-) # in this case min_amount and discount_amount are ignored
+) # in this case min_quantity and discount_amount are ignored
 PricingRule.find_or_create_by!(
   discount_type: PricingRule::PRICE_DISCOUNT,
-  min_amount: 3,
+  min_quantity: 3,
   discount_amount: 0.5,
   status: PricingRule::ACTIVE_STATUS,
   product: strawberries
 )
 PricingRule.find_or_create_by!(
   discount_type: PricingRule::PERCENTAGE_DISCOUNT,
-  min_amount: 3,
+  min_quantity: 3,
   discount_amount: 0.33,
   status: PricingRule::ACTIVE_STATUS,
   product: coffee

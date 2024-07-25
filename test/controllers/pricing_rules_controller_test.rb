@@ -18,8 +18,8 @@ class PricingRulesControllerTest < ActionDispatch::IntegrationTest
                                    "type=\"hidden\" name=\"pricing_rule[product_id]\" " \
                                    "id=\"pricing_rule_product_id\" />"
     assert_includes response.body, "<h1>Edit pricing rule: #{pricing_rule.product.name}</h1>"
-    assert_includes response.body, "<input type=\"text\" value=\"#{pricing_rule.min_amount}\" " \
-                                   "name=\"pricing_rule[min_amount]\" id=\"pricing_rule_min_amount\" />"
+    assert_includes response.body, "<input type=\"text\" value=\"#{pricing_rule.min_quantity}\" " \
+                                   "name=\"pricing_rule[min_quantity]\" id=\"pricing_rule_min_quantity\" />"
   end
 
   test "create" do
@@ -46,16 +46,38 @@ class PricingRulesControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to edit_product_path(product.id)
   end
 
+  test "create fails" do
+    product = create(:product)
+    pricing_rule = { min_quantity: nil, discount_amount: nil, status: "invalid",
+                     discount_type: "invalid", product_id: product.id, }
+
+    assert_no_difference -> { product.pricing_rules.count } do
+      post pricing_rules_path, params: { pricing_rule: }
+    end
+
+    assert_template :new
+  end
+
   test "update" do
     product = create(:product)
     pricing_rule = create(:pricing_rule, :percentage_discount, product:)
-    new_min_amount = 5
+    new_min_quantity = 5
 
-    put pricing_rule_path(pricing_rule), params: { pricing_rule: { min_amount: new_min_amount } }
+    put pricing_rule_path(pricing_rule),
+        params: { pricing_rule: { min_quantity: new_min_quantity } }
 
     pricing_rule.reload
-    assert pricing_rule.min_amount, new_min_amount
+    assert pricing_rule.min_quantity, new_min_quantity
     assert_redirected_to edit_product_path(product)
+  end
+
+  test "update fails" do
+    product = create(:product)
+    pricing_rule = create(:pricing_rule, :percentage_discount, product:)
+
+    put pricing_rule_path(pricing_rule), params: { pricing_rule: { min_quantity: nil } }
+
+    assert_template :edit
   end
 
   test "destroy" do

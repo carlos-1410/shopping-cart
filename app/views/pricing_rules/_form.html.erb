@@ -13,7 +13,7 @@
     <p style="color: red"><%= @pricing_rule.errors[:status].join("\n") %></p>
   </div>
 
-  <% %i(min_amount discount_amount).each do |name| %>
+  <% %i(min_quantity discount_amount).each do |name| %>
     <%= render "shared/text_field", form:, name:, type: "text", errors: @pricing_rule.errors[name] %>
   <% end %>
 

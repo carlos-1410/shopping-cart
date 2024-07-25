@@ -23,7 +23,7 @@ class PricingRule < ApplicationRecord
   end
 
   with_options presence: true, unless: :buy_one_get_one_free? do
-    validates :min_amount, numericality: { greater_than_or_equal: 0 }
+    validates :min_quantity, numericality: { greater_than_or_equal: 0 }
     validates :discount_amount, numericality: { greater_than: 0 }
   end
 
@@ -50,7 +50,7 @@ class PricingRule < ApplicationRecord
   def clear_amounts
     return unless buy_one_get_one_free?
 
-    self.min_amount = 0
+    self.min_quantity = 0
     self.discount_amount = 0
   end
 end

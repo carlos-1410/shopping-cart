@@ -5,11 +5,12 @@ require "test_helper"
 class PricingRuleTest < ActiveSupport::TestCase
   test "required fields" do
     pricing_rule = build(:pricing_rule, :price_discount,
-                         discount_type: nil, status: nil, min_amount: nil, discount_amount: nil)
+                         discount_type: nil, status: nil,
+                         min_quantity: nil, discount_amount: nil, product: nil)
 
     assert pricing_rule.invalid?
 
-    %i(discount_type discount_amount status min_amount).each do |field|
+    %i(discount_type discount_amount status min_quantity product).each do |field|
       assert pricing_rule.errors.added?(field, :blank)
     end
   end
@@ -39,10 +40,21 @@ class PricingRuleTest < ActiveSupport::TestCase
 
   test "amounts are not required if buy_one_get_one_free?" do
     pricing_rule = build(:pricing_rule, :buy_one_get_one_free_discount,
-                         min_amount: nil, discount_amount: nil)
+                         min_quantity: nil, discount_amount: nil)
 
     assert pricing_rule.buy_one_get_one_free?
     assert pricing_rule.valid?
+  end
+
+  test "non-numeric amounts are invalid" do
+    invalid_amount = "invalid"
+    pricing_rule = build(:pricing_rule, :price_discount,
+                         min_quantity: invalid_amount, discount_amount: invalid_amount)
+
+    assert pricing_rule.invalid?
+    assert pricing_rule.errors.added?(:min_quantity, :not_a_number, greater_than_or_equal: 0,
+                                                                  value: invalid_amount)
+    assert pricing_rule.errors.added?(:discount_amount, :not_a_number, value: invalid_amount)
   end
 
   test "only 1 active pricing rule allowed" do

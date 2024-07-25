@@ -10,14 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_07_24_181300) do
+ActiveRecord::Schema[7.0].define(version: 2024_07_23_201303) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "pricing_rules", force: :cascade do |t|
     t.string "discount_type", null: false
-    t.integer "min_amount", default: 0, null: false
-    t.decimal "discount_amount", precision: 5, scale: 2
+    t.integer "min_quantity", default: 0, null: false
+    t.decimal "discount_amount", precision: 5, scale: 2, null: false
     t.string "status", null: false
     t.bigint "product_id", null: false
     t.datetime "created_at", null: false

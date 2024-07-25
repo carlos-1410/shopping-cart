@@ -4,7 +4,7 @@ FactoryBot.define do
   factory :pricing_rule do
     trait :price_discount do
       discount_type { PricingRule::PRICE_DISCOUNT }
-      min_amount { 2 }
+      min_quantity { 2 }
       discount_amount { 0.5 }
       status { PricingRule::ACTIVE_STATUS }
       product { create(:product) }
@@ -12,7 +12,7 @@ FactoryBot.define do
 
     trait :percentage_discount do
       discount_type { PricingRule::PERCENTAGE_DISCOUNT }
-      min_amount { 2 }
+      min_quantity { 2 }
       discount_amount { 0.5 }
       status { PricingRule::ACTIVE_STATUS }
       product { create(:product) }
