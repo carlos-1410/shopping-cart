@@ -17,7 +17,7 @@ class PricingRulesController < ApplicationController
       if @pricing_rule.save
         format.html { redirect_to edit_product_path(@pricing_rule.product) }
       else
-        format.html { render :new }
+        format.html { render :new, status: :unprocessable_entity }
       end
     end
   end
@@ -30,7 +30,7 @@ class PricingRulesController < ApplicationController
                       notice: "Pricing rule was successfully updated."
         end
       else
-        format.html { render :edit }
+        format.html { render :edit, status: :unprocessable_entity }
       end
     end
   end

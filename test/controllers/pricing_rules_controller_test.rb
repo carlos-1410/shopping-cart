@@ -53,9 +53,9 @@ class PricingRulesControllerTest < ActionDispatch::IntegrationTest
 
     assert_no_difference -> { product.pricing_rules.count } do
       post pricing_rules_path, params: { pricing_rule: }
+      assert_response :unprocessable_entity
+      assert_template :new
     end
-
-    assert_template :new
   end
 
   test "update" do
@@ -77,6 +77,7 @@ class PricingRulesControllerTest < ActionDispatch::IntegrationTest
 
     put pricing_rule_path(pricing_rule), params: { pricing_rule: { min_quantity: nil } }
 
+    assert_response :unprocessable_entity
     assert_template :edit
   end
 
