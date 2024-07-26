@@ -3,7 +3,7 @@
   <td><%= cart_item.product.name %></td>
   <td><%= cart_item.quantity %></td>
   <td><%= number_to_currency cart_item.total_price, unit: "€" %></td>
-  <td><%= cart_item.product.active_pricing_rule&.discount_type %></td>
+  <td><%= cart_item.discounts_applied.join(", ") %>
   <td><%= number_to_currency cart_item.discount_amount, unit: "€" %></td>
   <td class="d-flex justify-content-center">
     <%= form_with(url: remove_from_cart_path) do |f| %>

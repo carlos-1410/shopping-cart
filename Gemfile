@@ -21,6 +21,7 @@ group :development, :test do
   gem "factory_bot_rails", "~> 6.4.3"
   gem "minitest", "~> 5.22.2"
   gem "minitest-profile"
+  gem "mocha", "~> 2.4"
   gem "rails-controller-testing", "~> 1.0"
   gem "webmock", "~> 3.23.0"
 end

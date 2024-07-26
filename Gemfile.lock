@@ -117,6 +117,8 @@ GEM
     mini_mime (1.1.5)
     minitest (5.22.3)
     minitest-profile (0.0.2)
+    mocha (2.4.5)
+      ruby2_keywords (>= 0.0.5)
     msgpack (1.7.2)
     multi_json (1.15.0)
     net-imap (0.4.14)
@@ -211,6 +213,7 @@ GEM
       rubocop (>= 1.33.0, < 2.0)
       rubocop-ast (>= 1.31.1, < 2.0)
     ruby-progressbar (1.13.0)
+    ruby2_keywords (0.0.5)
     solargraph (0.50.0)
       backport (~> 1.2)
       benchmark
@@ -266,6 +269,7 @@ DEPENDENCIES
   json-schema (~> 4.3)
   minitest (~> 5.22.2)
   minitest-profile
+  mocha (~> 2.4)
   multi_json (~> 1.15)
   pg (~> 1.1)
   puma (~> 5.0)
