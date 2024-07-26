@@ -1,0 +1,9 @@
+<tr>
+  <td><%= discount_rule.discount_type %></td>
+  <td><%= minimum_amount(discount_rule) %></td>
+  <td><%= discount_amount(discount_rule) %></td>
+  <td><%= discount_rule.status %></td>
+  <td class="d-flex justify-content-center">
+    <%= link_to "Edit", edit_discount_rule_path(discount_rule), class: "btn btn-sm btn-secondary" %>
+  </td>
+</tr>

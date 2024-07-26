@@ -1,0 +1,24 @@
+<%= form_with(model: @discount_rule) do |form| %>
+  <%= form.hidden_field :product_id, value: params[:product_id] || @discount_rule.product.id %>
+
+  <div>
+    <%= form.label :discount_type, style: "display: block" %>
+    <%= form.select :discount_type, DiscountRule::DISCOUNT_TYPES %>
+    <p style="color: red"><%= @discount_rule.errors[:discount_type].join("\n") %></p>
+  </div>
+
+  <div>
+    <%= form.label :status, style: "display: block" %>
+    <%= form.select :status, DiscountRule::STATUSES %>
+    <p style="color: red"><%= @discount_rule.errors[:status].join("\n") %></p>
+  </div>
+
+  <% %i(min_quantity amount).each do |name| %>
+    <%= render "shared/text_field", form:, name:, type: "text", errors: @discount_rule.errors[name] %>
+  <% end %>
+
+  <div class="pt-2">
+    <%= form.submit "Save", class: "btn btn-primary" %>
+    <%= link_to "Cancel", edit_product_path(@discount_rule.product || params[:product_id]), class: "btn btn-secondary" %>
+  </div>
+<% end %>

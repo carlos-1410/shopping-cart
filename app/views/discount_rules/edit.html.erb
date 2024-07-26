@@ -3,10 +3,10 @@
     <div class="col-6">
       <div class="row">
         <div class="col-6">
-          <h1>Edit pricing rule: <%= @pricing_rule.product.name %></h1>
+          <h1>Edit pricing rule: <%= @discount_rule.product.name %></h1>
         </div>
         <div class="col-6">
-          <%= button_to "Destroy", pricing_rule_path(@pricing_rule), method: :delete, class: "btn btn-danger mt-2" %>
+          <%= button_to "Destroy", discount_rule_path(@discount_rule), method: :delete, class: "btn btn-danger mt-2" %>
         </div>
       </div>
       <p style="color: green"><%= notice %></p>

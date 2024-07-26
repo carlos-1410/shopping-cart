@@ -6,8 +6,8 @@ Rails.application.routes.draw do
   post "cart/add", as: :add_to_cart
   post "cart/remove", as: :remove_from_cart
 
-  resources :pricing_rules, except: %i(new)
-  get "pricing_rules/:product_id/new", to: "pricing_rules#new", as: :new_pricing_rule
+  resources :discount_rules, except: %i(new)
+  get "discount_rules/:product_id/new", to: "discount_rules#new", as: :new_discount_rule
 
   resources :products
 
