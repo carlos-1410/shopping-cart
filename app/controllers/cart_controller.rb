@@ -1,6 +1,10 @@
 # frozen_string_literal: true
 
 class CartController < ApplicationController
+  def show
+    @cart_items = CartItem.where(cart_id: @cart.id).includes(:product)
+  end
+
   def add # rubocop:disable Metrics/AbcSize
     response = ShoppingCart::Items::Manager.new(cart: @cart, product: product,
                                                 quantity: params[:quantity]).call

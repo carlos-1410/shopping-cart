@@ -3,8 +3,21 @@
 require "test_helper"
 
 class CartControllerTest < ActionDispatch::IntegrationTest
+  include QueryCounterHelper
+
   setup do
     @product = create(:product)
+  end
+
+  test "#show" do
+    # Add beforehand to test #show
+    assert_cart_item_added(@product.id, 1)
+
+    amount_of_selects_executed = select_queries_amount do
+      get cart_path
+    end
+
+    assert_equal 4, amount_of_selects_executed
   end
 
   test "#add throws an error quantity is zero" do

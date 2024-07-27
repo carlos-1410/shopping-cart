@@ -5,6 +5,7 @@ require_relative "../config/environment"
 require "minitest/mock"
 require "mocha/minitest"
 require "rails/test_help"
+require "./test/support/query_counter_helper"
 
 module ActiveSupport
   class TestCase

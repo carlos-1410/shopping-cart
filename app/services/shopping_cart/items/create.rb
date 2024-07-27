@@ -35,12 +35,12 @@ module ShoppingCart
       end
 
       def total_price
-        return 0 if discount_amount > cart_item_price
+        return 0 if discount_amount > price_before_discount
 
-        cart_item_price - discount_amount
+        price_before_discount - discount_amount
       end
 
-      def cart_item_price
+      def price_before_discount
         (product.price * quantity).ceil(2)
       end
 

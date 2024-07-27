@@ -15,7 +15,7 @@
       <p style="color: red"><%= flash[:error] %></p>
     </div>
 
-    <% @cart.cart_items.order(created_at: :asc).each do |cart_item| %>
+    <% @cart_items.order(created_at: :asc).each do |cart_item| %>
       <%= render "cart_item", cart_item: %>
     <% end %>
 
