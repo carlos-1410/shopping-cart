@@ -17,8 +17,8 @@ class DiscountRulesControllerTest < ActionDispatch::IntegrationTest
     assert_includes response.body, "<input value=\"#{discount_rule.product.id}\" autocomplete=\"off\" " \
                                    "type=\"hidden\" name=\"discount_rule[product_id]\" " \
                                    "id=\"discount_rule_product_id\" />"
-    assert_includes response.body, "<h1>Edit pricing rule: #{discount_rule.product.name}</h1>"
-    assert_includes response.body, "<input type=\"text\" value=\"#{discount_rule.min_quantity}\" " \
+    assert_includes response.body, "<h1>Edit discount rule: #{discount_rule.discount_type}</h1>"
+    assert_includes response.body, "<input class=\"form-control\" type=\"text\" value=\"#{discount_rule.min_quantity}\" " \
                                    "name=\"discount_rule[min_quantity]\" id=\"discount_rule_min_quantity\" />"
   end
 

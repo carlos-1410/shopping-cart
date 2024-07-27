@@ -1,27 +1,21 @@
-<div class="ml-4">
-  <p style="color: green"><%= flash[:notice] %></p>
-  <p style="color: red"><%= flash[:error] %></p>
-  <h1>Your cart</h1>
-
-  <div class="mb-5">
-    <table class="w-50">
-      <tr>
-        <th><strong>Code</strong></th>
-        <th><strong>Name</strong></th>
-        <th><strong>Quantity</strong></th>
-        <th><strong>Total price</strong></th>
-        <th><strong>Discounts applied</strong></th>
-        <th><strong>Discount amount</strong></th>
-        <th class="text-center"><strong>Actions</strong></th>
-        <th></th>
-      </tr>
-      <% @cart.cart_items.each do |cart_item| %>
-        <%= render "cart_item", cart_item: %>
-      <% end %>
-    </table>
+<div class="container-fluid mt-4 align-items-center">
+  <div class="row">
+    <div class="col-6">
+      <h1>Your cart</h1>
+    </div>
+    <div class="col-6">
+      <%= link_to "Products", products_path, class: "btn btn-success mt-1 float-end" %>
+    </div>
   </div>
+  <hr/>
 
-  <div class="d-inline-flex">
-    <%= link_to "Products", products_path, class: "btn btn-success mr-2" %>
+  <div class="container mb-5">
+    <div class="text-center">
+      <p style="color: green"><%= flash[:notice] %></p>
+      <p style="color: red"><%= flash[:error] %></p>
+    </div>
+    <% @cart.cart_items.order(created_at: :asc).each do |cart_item| %>
+      <%= render "cart_item", cart_item: %>
+    <% end %>
   </div>
 </div>

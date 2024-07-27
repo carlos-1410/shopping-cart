@@ -1,22 +1,73 @@
-<tr>
-  <td><%= cart_item.product.code %></td>
-  <td><%= cart_item.product.name %></td>
-  <td><%= cart_item.quantity %></td>
-  <td><%= number_to_currency cart_item.total_price, unit: "€" %></td>
-  <td><%= cart_item.discounts_applied.join(", ") %>
-  <td><%= number_to_currency cart_item.discount_amount, unit: "€" %></td>
-  <td class="d-flex justify-content-center">
-    <%= form_with(url: remove_from_cart_path) do |f| %>
-      <%= f.hidden_field :product_id, value: cart_item.product_id %>
-      <%= f.submit "Remove", class: "btn btn-sm btn-danger mr-1" %>
-    <% end %>
-  </td>
-  <td>
-    <%= form_with(url: add_to_cart_path) do |f| %>
-      <%= f.hidden_field :cart, value: true %>
-      <%= f.hidden_field :product_id, value: cart_item.product_id %>
-      <%= f.number_field :quantity, value: 0 %>
-      <%= f.submit "Update", class: "btn btn-primary" %>
-    <% end %>
-  </td>
-</tr>
+<div class="card mb-2">
+  <div class="card-header" id="<%= cart_item.id %>">
+    <div class="row align-items-center">
+      <div class="col-6">
+        <h5 class="mb-0">
+          <a href="#product_<%= cart_item.product.id %>" data-bs-toggle="collapse"  aria-expanded="true" aria-controls="collapseExample">
+            <%= cart_item.product.name %>
+          </a>
+        </h5>
+      </div>
+      <div class="col-6">
+        <%= form_with(url: remove_from_cart_path) do |f| %>
+          <%= f.hidden_field :product_id, value: cart_item.product_id %>
+          <%= f.submit "Remove", class: "btn btn-sm btn-danger float-end" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <div id="product_<%= cart_item.product.id %>" class="collapse show">
+    <div class="card-body">
+      <div class="row">
+        <div class="col-2">
+          <strong>Quantity</strong>
+        </div>
+        <div class="col-2">
+          <%= cart_item.quantity %>
+        </div>
+        <div class="col-4 offset-4 ">
+          <%= form_with(url: add_to_cart_path, class: "input-group") do |f| %>
+            <%= f.hidden_field :cart, value: true %>
+            <%= f.hidden_field :product_id, value: cart_item.product_id %>
+            <%= f.number_field :quantity, value: 0, class: "form-control mr-2" %>
+            <%= f.submit "Add to cart", class: "btn btn-primary" %>
+          <% end %>
+        </div>
+      </div>
+      <div class="row mb-3">
+        <div class="col-2">
+          <strong>Price without discount</strong>
+        </div>
+        <div class="col-6">
+          <%= number_to_currency (cart_item.product.price * cart_item.quantity), unit: "€" %>
+        </div>
+      </div>
+      <div class="row mb-3">
+        <div class="col-2">
+          <strong>Discounts applied</strong>
+        </div>
+        <div class="col-6">
+          <%= cart_item.discounts_applied.join(", ") %>
+        </div>
+      </div>
+      <div class="row mb-3">
+        <div class="col-2">
+          <strong>Discount amount</strong>
+        </div>
+        <div class="col-6">
+          <%= number_to_currency cart_item.discount_amount, unit: "€" %>
+        </div>
+      </div>
+      <hr/>
+      <div class="row">
+        <div class="col-2">
+          <strong>Total price</strong>
+        </div>
+        <div class="col-2">
+          <%= number_to_currency cart_item.total_price, unit: "€" %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

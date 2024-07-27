@@ -1,17 +1,19 @@
-<div class="ml-4">
+<div class="container-fluid mt-4 align-items-center">
   <div class="row">
     <div class="col-6">
-      <div class="row">
-        <div class="col-6">
-          <h1>Edit pricing rule: <%= @discount_rule.product.name %></h1>
-        </div>
-        <div class="col-6">
-          <%= button_to "Destroy", discount_rule_path(@discount_rule), method: :delete, class: "btn btn-danger mt-2" %>
-        </div>
-      </div>
-      <p style="color: green"><%= notice %></p>
+      <h1>Edit discount rule: <%= @discount_rule.discount_type %></h1>
+    </div>
+    <div class="col-6">
+      <%= button_to "Destroy", discount_rule_path(@discount_rule), method: :delete, class: "btn btn-danger mt-2 float-end" %>
+    </div>
+  </div>
+  <hr/>
 
-      <%= render "form" %>
+  <div class="container mb-5">
+    <div class="row">
+      <div class="col-12">
+        <%= render "form" %>
+      </div>
     </div>
   </div>
 </div>

@@ -1,15 +1,21 @@
-<tr>
-  <td><%= product.code %></td>
-  <td><%= product.name %></td>
-  <td><%= number_to_currency product.price, unit: "€" %></td>
-  <td class="d-flex justify-content-center">
-    <%= link_to "Edit", edit_product_path(product.id), class: "btn btn-sm btn-secondary mr-1" %>
-  </td>
-  <td>
-    <%= form_with(url: add_to_cart_path) do |f| %>
+<div class="row align-items-center justify-content-center mb-2">
+  <div class="col-1">
+    <%= product.code %>
+  </div>
+  <div class="col-2">
+    <%= product.name %>
+  </div>
+  <div class="col-1">
+    <%= number_to_currency product.price, unit: "€" %>
+  </div>
+  <div class="col-3">
+    <%= form_with(url: add_to_cart_path, class: "input-group") do |f| %>
       <%= f.hidden_field :product_id, value: product.id %>
-      <%= f.number_field :quantity, value: 0 %>
+      <%= f.number_field :quantity, value: 0, class: "form-control mr-2" %>
       <%= f.submit "Add to cart", class: "btn btn-primary" %>
     <% end %>
-  </td>
-</tr>
+  </div>
+  <div class="col-1 text-center">
+    <%= link_to "Edit", edit_product_path(product.id), class: "btn btn-sm btn-secondary mr-1" %>
+  </div>
+</div>

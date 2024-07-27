@@ -8,9 +8,9 @@ class ProductsControllerTest < ActionDispatch::IntegrationTest
 
     get products_path
     assert_response :success
-    assert_includes response.body, "<td>#{product.code}</td>\n  " \
-                                   "<td>#{product.name}</td>\n  " \
-                                   "<td>€#{product.price}</td>"
+    assert_includes response.body, "<div class=\"col-1\">\n    #{product.code}\n  </div>\n  " \
+                                   "<div class=\"col-2\">\n    #{product.name}\n  </div>\n  " \
+                                   "<div class=\"col-1\">\n    €#{product.price}\n  </div>"
   end
 
   test "new" do
@@ -23,7 +23,8 @@ class ProductsControllerTest < ActionDispatch::IntegrationTest
 
     get edit_product_path(product)
     assert_response :success
-    assert_includes response.body, "<input type=\"text\" value=\"#{product.price}\" " \
+    assert_includes response.body, "<input class=\"form-control\" type=\"text\" " \
+                                   "value=\"#{product.price}\" " \
                                    "name=\"product[price]\" id=\"product_price\" />"
     assert_includes response.body, "<h1>Edit product: #{product.name}</h1>"
   end

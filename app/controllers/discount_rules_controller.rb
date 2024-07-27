@@ -15,7 +15,10 @@ class DiscountRulesController < ApplicationController
 
     respond_to do |format|
       if @discount_rule.save
-        format.html { redirect_to edit_product_path(@discount_rule.product) }
+        format.html do
+          redirect_to edit_product_path(@discount_rule.product),
+                      flash: { notice: "Pricing rule was successfully created." }
+        end
       else
         format.html { render :new, status: :unprocessable_entity }
       end
@@ -27,7 +30,7 @@ class DiscountRulesController < ApplicationController
       if discount_rule.update(discount_rule_attributes)
         format.html do
           redirect_to edit_product_path(discount_rule.product),
-                      notice: "Pricing rule was successfully updated."
+                      flash: { notice: "Pricing rule was successfully updated." }
         end
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -41,7 +44,7 @@ class DiscountRulesController < ApplicationController
       if discount_rule.destroy
         format.html do
           redirect_to edit_product_path(product),
-                      notice: "Pricing rule was successfully destroyed."
+                      flash: { notice: "Pricing rule was successfully removed." }
         end
       end
     end

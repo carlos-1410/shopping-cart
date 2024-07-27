@@ -1,9 +1,7 @@
-<div>
-  <%= form.label name, style: "display: block" %>
-  <%= form.text_field name %>
+<div class="mb-3">
+  <%= form.label name, class: "form-label" %>
+  <%= form.text_field name, class: "form-control" %>
   <% if errors.any? %>
-    <% errors.each do |e| %>
-      <p style="color: red"><%= e %></p>
-    <% end %>
+    <p style="color: red"><%= errors.join(", ") %></p>
   <% end %>
 </div>

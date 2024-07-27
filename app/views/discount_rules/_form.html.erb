@@ -1,15 +1,15 @@
 <%= form_with(model: @discount_rule) do |form| %>
   <%= form.hidden_field :product_id, value: params[:product_id] || @discount_rule.product.id %>
 
-  <div>
-    <%= form.label :discount_type, style: "display: block" %>
-    <%= form.select :discount_type, DiscountRule::DISCOUNT_TYPES %>
+  <div class="mb-3">
+    <%= form.label :discount_type, class: "form-label" %>
+    <%= form.select :discount_type, DiscountRule::DISCOUNT_TYPES, {}, { class: "form-select" } %>
     <p style="color: red"><%= @discount_rule.errors[:discount_type].join("\n") %></p>
   </div>
 
   <div>
     <%= form.label :status, style: "display: block" %>
-    <%= form.select :status, DiscountRule::STATUSES %>
+    <%= form.select :status, DiscountRule::STATUSES, {}, { class: "form-select" } %>
     <p style="color: red"><%= @discount_rule.errors[:status].join("\n") %></p>
   </div>
 
