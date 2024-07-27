@@ -5,9 +5,9 @@
 2. `bundle install`
 3. `rails db:create && rails db:migrate && rails db:seed`
 
-## Pricing rules
+## Discount rules
 
-Each product can have zero or more pricing rules.
+Each product can have zero or more discount rules.
 
 `DiscountRule` attributes
 - `type` - type of discount based on which we calculate the product group price.

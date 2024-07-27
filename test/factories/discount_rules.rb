@@ -13,7 +13,7 @@ FactoryBot.define do
     trait :percentage_discount do
       discount_type { DiscountRule::PERCENTAGE_DISCOUNT }
       min_quantity { 2 }
-      amount { 0.5 }
+      amount { 5 }
       status { DiscountRule::ACTIVE_STATUS }
       product { create(:product) }
     end

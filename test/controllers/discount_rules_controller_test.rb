@@ -14,12 +14,15 @@ class DiscountRulesControllerTest < ActionDispatch::IntegrationTest
 
     get edit_discount_rule_path(discount_rule)
     assert_response :success
-    assert_includes response.body, "<input value=\"#{discount_rule.product.id}\" autocomplete=\"off\" " \
-                                   "type=\"hidden\" name=\"discount_rule[product_id]\" " \
+    assert_includes response.body, "<input value=\"#{discount_rule.product.id}\" " \
+                                   "autocomplete=\"off\" type=\"hidden\" " \
+                                   "name=\"discount_rule[product_id]\" " \
                                    "id=\"discount_rule_product_id\" />"
     assert_includes response.body, "<h1>Edit discount rule: #{discount_rule.discount_type}</h1>"
-    assert_includes response.body, "<input class=\"form-control\" type=\"text\" value=\"#{discount_rule.min_quantity}\" " \
-                                   "name=\"discount_rule[min_quantity]\" id=\"discount_rule_min_quantity\" />"
+    assert_includes response.body, "<input class=\"form-control\" type=\"text\" " \
+                                   "value=\"#{discount_rule.min_quantity}\" " \
+                                   "name=\"discount_rule[min_quantity]\" " \
+                                   "id=\"discount_rule_min_quantity\" />"
   end
 
   test "create" do

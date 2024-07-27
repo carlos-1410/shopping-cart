@@ -4,19 +4,24 @@ class CartItem < ApplicationRecord
   belongs_to :cart
   belongs_to :product
 
-  validates :quantity, :total_price, presence: true
+  with_options presence: true do
+    validates :quantity, numericality: { greater_than: 0 }
+    validates :total_price
+  end
 
   def discounts_applied
-    product.active_discount_rules
-      .select{ discount_applicable?(_1) }
+    active_discount_rules = product.active_discount_rules
+      .select { discount_applicable?(_1) }
       .map(&:discount_type)
+
+    return ["-"] if active_discount_rules.empty?
+
+    active_discount_rules
   end
 
   private
 
   def discount_applicable?(discount_rule)
-    return true if discount_rule.buy_one_get_one_free?
-
     quantity >= discount_rule.min_quantity
   end
 end

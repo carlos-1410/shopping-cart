@@ -13,12 +13,20 @@ class CartItemTest < ActiveSupport::TestCase
     end
   end
 
+  test "invalid when quantity is lower than or equal to 0" do
+    cart_item = build(:cart_item, quantity: 0)
+    assert cart_item.invalid?
+
+    cart_item = build(:cart_item, quantity: -10)
+    assert cart_item.invalid?
+  end
+
   test "#discounts_applied" do
     product = create(:product)
     create(:discount_rule, :buy_one_get_one_free_discount, product:)
-    create(:discount_rule, :percentage_discount, product:, min_quantity: 1, amount: 1)
-    create(:discount_rule, :price_discount, product:, min_quantity: 1, amount: 1)
-    cart_item = create(:cart_item, product:, quantity: 1)
+    create(:discount_rule, :percentage_discount, product: product, min_quantity: 1, amount: 1)
+    create(:discount_rule, :price_discount, product: product, min_quantity: 1, amount: 1)
+    cart_item = create(:cart_item, product: product, quantity: 2)
     expected_discount_types = DiscountRule::DISCOUNT_TYPES
 
     assert_equal cart_item.discounts_applied, expected_discount_types

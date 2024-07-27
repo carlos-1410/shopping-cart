@@ -5,8 +5,8 @@ require "test_helper"
 class PricingRuleTest < ActiveSupport::TestCase
   test "required fields" do
     discount_rule = build(:discount_rule, :price_discount,
-                         discount_type: nil, status: nil,
-                         min_quantity: nil, amount: nil, product: nil)
+                          discount_type: nil, status: nil,
+                          min_quantity: nil, amount: nil, product: nil)
 
     assert discount_rule.invalid?
 
@@ -38,18 +38,19 @@ class PricingRuleTest < ActiveSupport::TestCase
     assert discount_rule.errors.added?(:product, :blank)
   end
 
-  test "amounts are not required if buy_one_get_one_free?" do
+  test "amounts are not required, but set before_save if buy_one_get_one_free?" do
     discount_rule = build(:discount_rule, :buy_one_get_one_free_discount,
-                         min_quantity: nil, amount: nil)
+                          min_quantity: nil, amount: nil)
 
     assert discount_rule.buy_one_get_one_free?
+    assert 2, discount_rule.amount
     assert discount_rule.valid?
   end
 
   test "non-numeric amounts are invalid" do
     invalid_amount = "invalid"
     discount_rule = build(:discount_rule, :price_discount,
-                         min_quantity: invalid_amount, amount: invalid_amount)
+                          min_quantity: invalid_amount, amount: invalid_amount)
 
     assert discount_rule.invalid?
     assert discount_rule.errors.added?(:min_quantity, :not_a_number, greater_than_or_equal: 0,
@@ -62,7 +63,8 @@ class PricingRuleTest < ActiveSupport::TestCase
     create(:discount_rule, :buy_one_get_one_free_discount, product:)
     invalid_discount_rule = build(:discount_rule, :buy_one_get_one_free_discount, product:)
     assert invalid_discount_rule.invalid?
-    assert invalid_discount_rule.errors.added?(:discount_type, :taken, value: "buy_one_get_one_free")
+    assert invalid_discount_rule.errors.added?(:discount_type, :taken,
+                                               value: "buy_one_get_one_free")
   end
 
   test "valid pricing rules" do

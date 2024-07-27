@@ -17,7 +17,7 @@ DiscountRule.find_or_create_by!(
 DiscountRule.find_or_create_by!(
   discount_type: DiscountRule::PERCENTAGE_DISCOUNT,
   min_quantity: 3,
-  amount: 0.33,
+  amount: 33,
   status: DiscountRule::ACTIVE_STATUS,
   product: coffee
 )

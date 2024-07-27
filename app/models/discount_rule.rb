@@ -28,7 +28,7 @@ class DiscountRule < ApplicationRecord
   # No point to have more than one discount of this type
   validates :discount_type, uniqueness: { scope: :product_id }, if: :buy_one_get_one_free?
 
-  before_save :clear_amounts
+  before_save :set_amounts, if: :buy_one_get_one_free?
 
   def active?
     status == ACTIVE_STATUS
@@ -40,10 +40,8 @@ class DiscountRule < ApplicationRecord
 
   private
 
-  def clear_amounts
-    return unless buy_one_get_one_free?
-
-    self.min_quantity = 0
+  def set_amounts
+    self.min_quantity = 2
     self.amount = 0
   end
 end
