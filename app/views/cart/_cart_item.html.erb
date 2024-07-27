@@ -51,7 +51,11 @@
           <strong>Discounts applied</strong>
         </div>
         <div class="col-6">
-          <%= cart_item.discounts_applied.join(", ") %>
+          <% if cart_item.discounts_applied.empty? %>
+            -
+          <% else %>
+            <%= cart_item.discounts_applied.join(", ") %>
+          <% end %>
         </div>
       </div>
       <div class="row mb-3">

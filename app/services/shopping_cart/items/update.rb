@@ -11,7 +11,8 @@ module ShoppingCart
 
       def call
         if quantity.positive?
-          cart_item.save_with_response(quantity:, total_price:, discount_amount:)
+          cart_item.save_with_response(quantity:, total_price:, discount_amount:,
+                                       discounts_applied:)
         else
           ShoppingCart::Items::Destroy.new(cart:, product:).call
         end

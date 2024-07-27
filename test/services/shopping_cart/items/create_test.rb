@@ -39,6 +39,7 @@ module ShoppingCart
 
           assert response.success?
           assert_equal discount_rule.amount, response.value.discount_amount
+          assert_includes response.value.discounts_applied, DiscountRule::PRICE_DISCOUNT
         end
       end
 
@@ -54,6 +55,7 @@ module ShoppingCart
 
           assert response.success?
           assert_equal expected_discount_amount, response.value.discount_amount
+          assert_includes response.value.discounts_applied, DiscountRule::PERCENTAGE_DISCOUNT
         end
       end
 
@@ -80,6 +82,7 @@ module ShoppingCart
 
           assert response.success?
           assert_equal expected_discount_amount, response.value.discount_amount
+          assert_equal DiscountRule::DISCOUNT_TYPES.sort, response.value.discounts_applied.sort
         end
       end
     end

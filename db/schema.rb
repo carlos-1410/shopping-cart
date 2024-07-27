@@ -18,6 +18,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_07_27_153801) do
     t.integer "quantity", default: 0, null: false
     t.bigint "total_price", null: false
     t.bigint "discount_amount"
+    t.string "discounts_applied", array: true
     t.bigint "product_id", null: false
     t.uuid "cart_id", null: false
     t.datetime "created_at", null: false

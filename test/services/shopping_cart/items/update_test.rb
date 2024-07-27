@@ -42,6 +42,7 @@ module ShoppingCart
         assert response.success?
         assert_equal expected_discount_amount, response.value.discount_amount
         assert_equal expected_quantity, response.value.quantity
+        assert_includes response.value.discounts_applied, DiscountRule::PRICE_DISCOUNT
       end
 
       test "updates a new cart_item with percentage_discount" do
@@ -58,6 +59,7 @@ module ShoppingCart
         assert response.success?
         assert_equal expected_discount_amount, response.value.discount_amount
         assert_equal expected_quantity, response.value.quantity
+        assert_includes response.value.discounts_applied, DiscountRule::PERCENTAGE_DISCOUNT
       end
 
       test "create a new cart_item with all the discounts" do
@@ -86,6 +88,7 @@ module ShoppingCart
           assert response.success?
           assert_equal expected_discount_amount, response.value.discount_amount
           assert_equal expected_quantity, response.value.quantity
+          assert_equal DiscountRule::DISCOUNT_TYPES.sort, response.value.discounts_applied.sort
         end
       end
     end
