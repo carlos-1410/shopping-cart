@@ -15,7 +15,7 @@
       <p style="color: red"><%= flash[:error] %></p>
     </div>
 
-    <% @cart_items.order(created_at: :asc).each do |cart_item| %>
+    <% @cart_items.each do |cart_item| %>
       <%= render "cart_item", cart_item: %>
     <% end %>
 
@@ -23,12 +23,12 @@
 
     <div class="row align-items-center mb-2">
       <div class="col-12">
-        <h3>Total cart value: <%= number_to_currency cents_to_amount(@cart.cart_items.sum(&:total_price)), unit: "€" %>
+        <h3>Total cart value: <%= number_to_currency cents_to_amount(@cart_items.sum(&:total_price)), unit: "€" %>
       </div>
     </div>
     <div class="row align-items-center mb-2">
       <div class="col-12">
-        <h3>Total discount amount: <%= number_to_currency cents_to_amount(@cart.cart_items.sum(&:discount_amount)), unit: "€" %>
+        <h3>Total discount amount: <%= number_to_currency cents_to_amount(@cart_items.sum(&:discount_amount)), unit: "€" %>
       </div>
     </div>
   </div>

@@ -2,7 +2,7 @@
 
 class CartController < ApplicationController
   def show
-    @cart_items = CartItem.where(cart_id: @cart.id).includes(:product)
+    @cart_items = CartItem.where(cart_id: @cart.id).includes(:product).order(created_at: :asc)
   end
 
   def add # rubocop:disable Metrics/AbcSize

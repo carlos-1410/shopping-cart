@@ -17,7 +17,7 @@ class CartControllerTest < ActionDispatch::IntegrationTest
       get cart_path
     end
 
-    assert_equal 4, amount_of_selects_executed
+    assert_equal 3, amount_of_selects_executed
   end
 
   test "#add throws an error quantity is zero" do

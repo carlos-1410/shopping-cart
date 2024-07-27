@@ -17,10 +17,4 @@ module ApplicationHelper
 
     amount.to_d / 100
   end
-
-  def amount_to_cents(amount)
-    return if amount.nil?
-
-    (amount.to_d.round(2) * 100).to_i
-  end
 end
