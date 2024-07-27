@@ -2,8 +2,8 @@
 
 module ShoppingCart
   module Items
-    class Update
-      def initialize(cart:, cart_item:, quantity: 0)
+    class Update < Create
+      def initialize(cart:, cart_item:, quantity: 0) # rubocop:disable Lint/MissingSuper
         @cart = cart
         @cart_item = cart_item
         @quantity = quantity
@@ -21,24 +21,8 @@ module ShoppingCart
 
       attr_reader :cart, :cart_item
 
-      def discount_amount
-        product.active_discount_rules.map do |discount_rule|
-          DiscountCalculator::Manager.new(product:, quantity:, discount_rule:).call
-        end.sum
-      end
-
       def quantity
         cart_item.present? ? cart_item.quantity + @quantity : @quantity
-      end
-
-      def total_price
-        return 0 if discount_amount > cart_item_price
-
-        cart_item_price - discount_amount
-      end
-
-      def cart_item_price
-        (product.price * quantity).ceil(2)
       end
 
       def product

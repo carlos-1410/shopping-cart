@@ -26,12 +26,15 @@
         <div class="col-2">
           <%= cart_item.quantity %>
         </div>
-        <div class="col-4 offset-4 ">
+        <div class="col-4 offset-4">
           <%= form_with(url: add_to_cart_path, class: "input-group") do |f| %>
             <%= f.hidden_field :cart, value: true %>
             <%= f.hidden_field :product_id, value: cart_item.product_id %>
-            <%= f.number_field :quantity, value: 0, class: "form-control mr-2" %>
-            <%= f.submit "Add to cart", class: "btn btn-primary" %>
+            <div class="input-group">
+              <span class="input-group-text" id="cart_item_quantity">+/-</span>
+              <%= f.number_field :quantity, value: 0, class: "form-control mr-2" %>
+              <%= f.submit "Add to cart", class: "btn btn-primary" %>
+            </div>
           <% end %>
         </div>
       </div>
@@ -65,7 +68,10 @@
           <strong>Total price</strong>
         </div>
         <div class="col-2">
-          <%= number_to_currency cart_item.total_price, unit: "€" %>
+          <% if cart_item.discount_amount > 0 %>
+            <del><%= number_to_currency (cart_item.product.price * cart_item.quantity).ceil(2), unit: "€" %></del>
+          <% end %>
+          <strong><%= number_to_currency cart_item.total_price, unit: "€" %></strong>
         </div>
       </div>
     </div>
