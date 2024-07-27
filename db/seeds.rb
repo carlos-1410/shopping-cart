@@ -1,6 +1,6 @@
-green_tea = Product.find_or_create_by!(name: "Green tea", code: "GR1", price: 3.11)
-strawberries = Product.find_or_create_by!(name: "Strawberries", code: "SR1", price: 5.00)
-coffee = Product.find_or_create_by!(name: "Coffee", code: "CF1", price: 11.23)
+green_tea = Product.find_or_create_by!(name: "Green tea", code: "GR1", price: 311)
+strawberries = Product.find_or_create_by!(name: "Strawberries", code: "SR1", price: 500)
+coffee = Product.find_or_create_by!(name: "Coffee", code: "CF1", price: 1123)
 
 DiscountRule.find_or_create_by!(
   discount_type: DiscountRule::BUY_ONE_GET_ONE_FREE_DISCOUNT, 
@@ -10,14 +10,14 @@ DiscountRule.find_or_create_by!(
 DiscountRule.find_or_create_by!(
   discount_type: DiscountRule::PRICE_DISCOUNT,
   min_quantity: 3,
-  amount: 0.5,
+  amount: 50,
   status: DiscountRule::ACTIVE_STATUS,
   product: strawberries
 )
 DiscountRule.find_or_create_by!(
   discount_type: DiscountRule::PERCENTAGE_DISCOUNT,
   min_quantity: 3,
-  amount: 33,
+  amount: 330,
   status: DiscountRule::ACTIVE_STATUS,
   product: coffee
 )

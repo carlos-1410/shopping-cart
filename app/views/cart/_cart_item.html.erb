@@ -43,7 +43,7 @@
           <strong>Price without discount</strong>
         </div>
         <div class="col-6">
-          <%= number_to_currency (cart_item.product.price * cart_item.quantity), unit: "€" %>
+          <%= number_to_currency cents_to_amount(cart_item.product.price * cart_item.quantity), unit: "€" %>
         </div>
       </div>
       <div class="row mb-3">
@@ -59,7 +59,7 @@
           <strong>Discount amount</strong>
         </div>
         <div class="col-6">
-          <%= number_to_currency cart_item.discount_amount, unit: "€" %>
+          <%= number_to_currency cents_to_amount(cart_item.discount_amount), unit: "€" %>
         </div>
       </div>
       <hr/>
@@ -69,9 +69,9 @@
         </div>
         <div class="col-2">
           <% if cart_item.discount_amount > 0 %>
-            <del><%= number_to_currency (cart_item.product.price * cart_item.quantity).ceil(2), unit: "€" %></del>
+            <del><%= number_to_currency cents_to_amount(cart_item.product.price * cart_item.quantity).ceil(2), unit: "€" %></del>
           <% end %>
-          <strong><%= number_to_currency cart_item.total_price, unit: "€" %></strong>
+          <strong><%= number_to_currency cents_to_amount(cart_item.total_price), unit: "€" %></strong>
         </div>
       </div>
     </div>

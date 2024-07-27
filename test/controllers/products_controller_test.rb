@@ -3,6 +3,8 @@
 require "test_helper"
 
 class ProductsControllerTest < ActionDispatch::IntegrationTest
+  include ApplicationHelper
+
   test "index" do
     product = create(:product)
 
@@ -10,7 +12,7 @@ class ProductsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
     assert_includes response.body, "<div class=\"col-1\">\n    #{product.code}\n  </div>\n  " \
                                    "<div class=\"col-2\">\n    #{product.name}\n  </div>\n  " \
-                                   "<div class=\"col-1\">\n    €#{product.price}\n  </div>"
+                                   "<div class=\"col-1\">\n    €#{cents_to_amount(product.price)}"
   end
 
   test "new" do

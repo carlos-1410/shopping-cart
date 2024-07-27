@@ -18,8 +18,8 @@ module DiscountCalculator
 
     test "with 2 products 30 discount" do
       quantity = 2
-      discount_amount = 30
-      expected_discount = (@product.price * quantity) * discount_amount / 100
+      discount_amount = 300
+      expected_discount = (@product.price * quantity) * discount_amount / 1000
 
       assert_discount(quantity: 2, expected_discount: expected_discount,
                       discount_amount: discount_amount)
@@ -34,7 +34,7 @@ module DiscountCalculator
 
       result = PercentageStrategy.new(product:, quantity:, discount_rule:).call
 
-      assert_equal result, expected_discount.ceil(2)
+      assert_equal expected_discount.ceil(2), result
     end
   end
 end

@@ -57,7 +57,8 @@ class DiscountRulesController < ApplicationController
   end
 
   def discount_rule_attributes
-    params.require(:discount_rule).permit(:discount_type, :amount,
-                                          :status, :min_quantity, :product_id)
+    params
+      .require(:discount_rule)
+      .permit(:discount_type, :amount, :status, :min_quantity, :product_id)
   end
 end

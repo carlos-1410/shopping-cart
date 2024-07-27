@@ -19,7 +19,7 @@ module DiscountCalculator
     attr_reader :product, :quantity, :discount_rule
 
     def amount
-      ((product.price * quantity) * discount_rule.amount / 100).ceil(2)
+      ((product.price * quantity) * discount_rule.amount).ceil(2) / 1000
     end
   end
 end

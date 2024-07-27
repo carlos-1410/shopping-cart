@@ -48,7 +48,7 @@ module ShoppingCart
           discount_rule = create(:discount_rule, :percentage_discount, product: @product,
                                                                        min_quantity: 1)
           expected_discount_amount =
-            ((@product.price * quantity) * discount_rule.amount / 100).ceil(2)
+            ((@product.price * quantity) * discount_rule.amount / 1000).ceil(2)
 
           response = Create.new(cart: @cart, product: @product, quantity: quantity).call
 
@@ -60,12 +60,12 @@ module ShoppingCart
       test "create a new cart_item with all the discounts" do
         assert_difference -> { CartItem.count }, +1 do
           quantity = 5
-          price_discount_amount = 0.5
+          price_discount_amount = 5 # 0.5 Euro
           percentage_discount_amount = 33
           expected_bogof_discount_amount = (quantity / 2) * @product.price
           expected_price_discount_amount = price_discount_amount * quantity
           expected_percentage_discount_amount =
-            (@product.price * quantity) * percentage_discount_amount / 100
+            (@product.price * quantity) * percentage_discount_amount / 1000
           expected_discount_amount = [expected_bogof_discount_amount,
                                       expected_price_discount_amount,
                                       expected_percentage_discount_amount].sum.ceil(2)

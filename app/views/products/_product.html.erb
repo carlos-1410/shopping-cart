@@ -6,7 +6,7 @@
     <%= product.name %>
   </div>
   <div class="col-1">
-    <%= number_to_currency product.price, unit: "€" %>
+    <%= number_to_currency cents_to_amount(product.price), unit: "€" %>
   </div>
   <div class="col-3">
     <%= form_with(url: add_to_cart_path, class: "input-group") do |f| %>

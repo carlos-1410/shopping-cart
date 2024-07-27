@@ -18,7 +18,7 @@ module DiscountCalculator
 
     test "with 2 products 30 discount" do
       quantity = 2
-      discount_amount = 0.5
+      discount_amount = 5 # 0.5 Euro
       expected_discount = discount_amount * quantity
 
       assert_discount(quantity: 2, expected_discount: expected_discount,

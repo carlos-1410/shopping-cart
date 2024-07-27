@@ -10,14 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_07_27_145303) do
+ActiveRecord::Schema[7.0].define(version: 2024_07_27_153801) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "cart_items", force: :cascade do |t|
     t.integer "quantity", default: 0, null: false
-    t.decimal "total_price", precision: 10, scale: 2, null: false
-    t.decimal "discount_amount", precision: 5, scale: 2
+    t.bigint "total_price", null: false
+    t.bigint "discount_amount"
     t.bigint "product_id", null: false
     t.uuid "cart_id", null: false
     t.datetime "created_at", null: false
@@ -34,7 +34,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_07_27_145303) do
   create_table "discount_rules", force: :cascade do |t|
     t.string "discount_type", null: false
     t.integer "min_quantity", default: 0, null: false
-    t.decimal "amount", precision: 5, scale: 2, null: false
+    t.integer "amount", null: false
     t.string "status", null: false
     t.bigint "product_id", null: false
     t.datetime "created_at", null: false
@@ -45,7 +45,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_07_27_145303) do
   create_table "products", force: :cascade do |t|
     t.string "code", null: false
     t.string "name", null: false
-    t.decimal "price", precision: 10, scale: 2, null: false
+    t.bigint "price", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["code"], name: "index_products_on_code", unique: true
