@@ -44,7 +44,7 @@ module DiscountCalculator
 
       result = BuyOneGetOneFreeStrategy.new(product:, quantity:, discount_rule:).call
 
-      assert_equal result, expected_discount
+      assert_equal result, expected_discount.ceil(2)
     end
   end
 end

@@ -2,7 +2,7 @@
 
 module DiscountCalculator
   class BuyOneGetOneFreeStrategy
-    def initialize(product:, quantity:, discount_rule: nil)
+    def initialize(product:, quantity:, **)
       @product = product
       @quantity = quantity
     end
@@ -18,7 +18,7 @@ module DiscountCalculator
     attr_reader :product, :quantity
 
     def amount
-      (quantity / 2) * product.price
+      ((quantity / 2) * product.price).ceil(2)
     end
   end
 end

@@ -21,7 +21,8 @@ module DiscountCalculator
       discount_amount = 0.5
       expected_discount = discount_amount * quantity
 
-      assert_discount(quantity: 2, expected_discount:, discount_amount:)
+      assert_discount(quantity: 2, expected_discount: expected_discount,
+                      discount_amount: discount_amount)
     end
 
     private
@@ -29,11 +30,11 @@ module DiscountCalculator
     def assert_discount(quantity:, expected_discount:, discount_amount: 1)
       product = @product
       discount_rule = create(:discount_rule, :price_discount,
-                             min_quantity: 2, amount: discount_amount, product:)
+                             min_quantity: 2, amount: discount_amount, product: product)
 
       result = PriceStrategy.new(product:, quantity:, discount_rule:).call
 
-      assert_equal result, expected_discount
+      assert_equal result, expected_discount.ceil(2)
     end
   end
 end

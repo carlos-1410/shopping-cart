@@ -1,11 +1,9 @@
 # frozen_string_literal: true
 
 class CartController < ApplicationController
-  def show; end
-
-  def add
-    response = ShoppingCart::ItemManager.new(cart: @cart, product: product,
-                                             quantity: quantity).call
+  def add # rubocop:disable Metrics/AbcSize
+    response = ShoppingCart::Items::Manager.new(cart: @cart, product: product,
+                                                quantity: params[:quantity]).call
     redirect_path = params[:cart].present? ? cart_path : products_path
 
     respond_to do |format|
@@ -18,8 +16,7 @@ class CartController < ApplicationController
   end
 
   def remove
-    response = ShoppingCart::ItemManager.new(cart: @cart, product: product,
-                                             remove: true).call
+    response = ShoppingCart::Items::Destroy.new(cart: @cart, product: product).call
 
     respond_to do |format|
       if response.success?
@@ -36,9 +33,5 @@ class CartController < ApplicationController
 
   def product
     @product ||= Product.find(params[:product_id])
-  end
-
-  def quantity
-    params[:quantity].to_i
   end
 end

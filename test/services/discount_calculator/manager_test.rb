@@ -32,7 +32,7 @@ module DiscountCalculator
     private
 
     def prepare_expectations_for(klass, discount_type, status: DiscountRule::ACTIVE_STATUS)
-      discount_rule = create(:discount_rule, discount_type, product: @product, status:)
+      discount_rule = create(:discount_rule, discount_type, product: @product, status: status)
       args = { product: @product, quantity: 1, discount_rule: discount_rule }
 
       discount_calculator_mock = mock

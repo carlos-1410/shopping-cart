@@ -19,7 +19,7 @@ module DiscountCalculator
     attr_reader :product, :quantity, :discount_rule
 
     def amount
-      discount_rule.amount * quantity
+      (discount_rule.amount * quantity).ceil(2)
     end
   end
 end
