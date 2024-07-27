@@ -1,0 +1,54 @@
+<div class="card mb-2">
+  <div class="card-header" id="<%= discount_rule.id %>">
+    <div class="row align-items-center">
+      <div class="col-6">
+        <h5 class="mb-0">
+          <a href="#discount_rule_<%= discount_rule.id %>" data-bs-toggle="collapse"  aria-expanded="true" aria-controls="collapseExample">
+            <%= discount_rule.discount_type %>
+          </a>
+        </h5>
+      </div>
+      <div class="col-6">
+        <%= link_to "Edit", edit_discount_rule_path(discount_rule), class: "btn btn-sm btn-secondary float-end" %>
+      </div>
+    </div>
+  </div>
+
+  <div id="discount_rule_<%= discount_rule.id %>" class="collapse show">
+    <div class="card-body">
+      <div class="row mb-3">
+        <div class="col-4">
+          <strong>Discount type</strong>
+        </div>
+        <div class="col-4">
+          <%= discount_rule.discount_type %>
+        </div>
+      </div>
+      <div class="row mb-3">
+        <div class="col-4">
+          <strong>Minimum quantity</strong>
+        </div>
+        <div class="col-4">
+          <%= discount_rule.min_quantity %>
+        </div>
+      </div>
+      <div class="row mb-3">
+        <div class="col-4">
+          <strong>Discount amount</strong>
+        </div>
+        <div class="col-4">
+          <%= discount_amount(discount_rule) %>
+        </div>
+      </div>
+      <div class="row mb-3">
+        <div class="col-4">
+          <strong>Status</strong>
+        </div>
+        <div class="col-4">
+          <%= discount_rule.status %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+  

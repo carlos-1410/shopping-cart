@@ -29,7 +29,7 @@ class CartControllerTest < ActionDispatch::IntegrationTest
       post add_to_cart_path, params: { product_id: @product.id, quantity: 2 }
 
       cart_item = CartItem.find_by(product_id: @product.id)
-      assert_equal cart_item.quantity, 2
+      assert_equal 3, cart_item.quantity
     end
   end
 

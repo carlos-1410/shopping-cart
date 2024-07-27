@@ -2,6 +2,8 @@
 
 ENV["RAILS_ENV"] ||= "test"
 require_relative "../config/environment"
+require "minitest/mock"
+require "mocha/minitest"
 require "rails/test_help"
 
 module ActiveSupport

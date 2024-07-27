@@ -142,3 +142,6 @@ Style/FormatStringToken:
 
 Layout/ArgumentAlignment:
   EnforcedStyle: with_first_argument
+
+Rails/I18nLocaleTexts:
+  Enabled: false

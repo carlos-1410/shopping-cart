@@ -13,6 +13,14 @@ class CartItemTest < ActiveSupport::TestCase
     end
   end
 
+  test "invalid when quantity is lower than or equal to 0" do
+    cart_item = build(:cart_item, quantity: 0)
+    assert cart_item.invalid?
+
+    cart_item = build(:cart_item, quantity: -10)
+    assert cart_item.invalid?
+  end
+
   test "valid cart_item" do
     cart_item = build(:cart_item)
 

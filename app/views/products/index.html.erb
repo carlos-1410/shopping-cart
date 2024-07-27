@@ -1,25 +1,39 @@
-<div class="ml-4">
-  <p style="color: green"><%= flash[:notice] %></p>
-  <p style="color: red"><%= flash[:error] %></p>
-  <h1>Products</h1>
-
-  <div class="mb-5">
-    <table class="w-50">
-      <tr>
-        <th><strong>Code</strong></th>
-        <th><strong>Name</strong></th>
-        <th><strong>Price</strong></th>
-        <th class="text-center"><strong>Actions</strong></th>
-        <th></th>
-      </tr>
-      <% @products.each do |product| %>
-        <%= render product %>
-      <% end %>
-    </table>
+<div class="container-fluid mt-4 align-items-center">
+  <div class="row">
+    <div class="col-6">
+      <h1>Products</h1>
+    </div>
+    <div class="col-6">
+      <div class="mt-1 float-end">
+        <%= link_to "Your cart", cart_path, class: "btn btn-primary" %>
+        <%= link_to "New product", new_product_path, class: "btn btn-success" %>
+      </div>
+    </div>
   </div>
+  <hr/>
 
-  <div class="d-inline-flex">
-    <%= link_to "New product", new_product_path, class: "btn btn-success mr-2" %>
-    <%= link_to "Your cart", cart_path, class: "btn btn-primary mr-2" %>
+  <div class="container">
+    <div class="text-center">
+      <p style="color: green"><%= flash[:notice] %></p>
+      <p style="color: red"><%= flash[:error] %></p>
+    </div>
+    <div class="row mb-4 justify-content-center">
+      <div class="col-1">
+        <strong>Code</strong>
+      </div>
+      <div class="col-2">
+        <strong>Name</strong>
+      </div>
+      <div class="col-1">
+        <strong>Price</strong>
+      </div>
+      <div class="col-3"></div>
+      <div class="col-1 text-center">
+        <strong>Actions</strong>
+      </div>
+    </div>
+    <% @products.each do |product| %>
+      <%= render product %>
+    <% end %>
   </div>
 </div>

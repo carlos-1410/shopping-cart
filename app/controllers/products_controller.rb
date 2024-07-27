@@ -43,7 +43,7 @@ class ProductsController < ApplicationController
       if product.destroy
         format.html do
           redirect_to products_path,
-                      flash: { notice: "Product was successfully destroyed." }
+                      flash: { notice: "Product was successfully removed." }
         end
       end
     end

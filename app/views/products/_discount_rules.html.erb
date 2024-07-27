@@ -1,0 +1,12 @@
+<div class="row mb-3 align-items-center">
+  <div class="col-6">
+    <h3>Discount rules</h3>
+  </div>
+  <div class="col-6">
+    <%= link_to "Add new", new_discount_rule_path(@product), class: "btn btn-success float-end" %>
+  </div>
+</div>
+
+<% product.discount_rules.each do |discount_rule| %>
+  <%= render "discount_rule", discount_rule: %>
+<% end %>

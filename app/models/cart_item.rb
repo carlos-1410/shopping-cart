@@ -4,5 +4,8 @@ class CartItem < ApplicationRecord
   belongs_to :cart
   belongs_to :product
 
-  validates :quantity, :total_price, presence: true
+  with_options presence: true do
+    validates :quantity, numericality: { greater_than: 0 }
+    validates :total_price
+  end
 end

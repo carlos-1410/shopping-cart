@@ -1,22 +1,27 @@
-<div class="ml-4">
+<div class="container-fluid mt-4 align-items-center">
   <div class="row">
     <div class="col-6">
-      <div class="row">
-        <div class="col-6">
-          <h1>Edit product: <%= @product.name %></h1>
-        </div>
-        <div class="col-6">
-          <%= button_to "Destroy", product_path(@product), method: :delete, class: "btn btn-danger mt-2 mr-2 float-right" %>
-        </div>
-      </div>
-      <hr/>
-      <p style="color: green"><%= notice %></p>
-
-      <%= render "form" %>
+      <h1>Edit product: <%= @product.name %></h1>
     </div>
-
     <div class="col-6">
-      <%= render "pricing_rules", product: @product %>
+      <%= button_to "Destroy", product_path(@product), method: :delete, class: "btn btn-danger mt-2 float-end" %>
+    </div>
+  </div>
+  <hr/>
+  
+  <div class="container mb-5">
+    <div class="text-center">
+      <p style="color: green"><%= flash[:notice] %></p>
+      <p style="color: red"><%= flash[:error] %></p>
+    </div>
+    <div class="row">
+      <div class="col-6 border-end">
+        <%= render "form" %>
+      </div>
+
+      <div class="col-6">
+        <%= render "discount_rules", product: @product %>
+      </div>
     </div>
   </div>
 </div>

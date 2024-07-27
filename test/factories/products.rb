@@ -4,7 +4,7 @@ FactoryBot.define do
   factory :product do
     code { "PR-#{random_chars} " }
     name { "My product #{random_chars}" }
-    price { 1.23 }
+    price { 123 }
   end
 end
 
