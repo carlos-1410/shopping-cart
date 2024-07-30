@@ -9,6 +9,8 @@ module ShoppingCart
       end
 
       def call
+        return Response.failure("Product was not found in the cart.") unless cart_item
+
         cart_item.destroy_with_response
       end
 

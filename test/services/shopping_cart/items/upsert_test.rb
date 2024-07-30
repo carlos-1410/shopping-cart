@@ -4,7 +4,7 @@ require "test_helper"
 
 module ShoppingCart
   module Items
-    class ManagerTest < ActiveSupport::TestCase
+    class UpsertTest < ActiveSupport::TestCase
       setup do
         @cart = Cart.create
         @product = create(:product)
@@ -19,7 +19,7 @@ module ShoppingCart
         items_manager_mock.expects(:call)
         ShoppingCart::Items::Update.expects(:new).with(**args).returns(items_manager_mock)
 
-        Manager.new(cart: @cart, product: @product, quantity: quantity).call
+        Upsert.new(cart: @cart, product: @product, quantity: quantity).call
       end
 
       test "calls create class when item_in_cart? is falsy" do
@@ -30,11 +30,11 @@ module ShoppingCart
         items_manager_mock.expects(:call)
         ShoppingCart::Items::Create.expects(:new).with(**args).returns(items_manager_mock)
 
-        Manager.new(cart: @cart, product: @product, quantity: quantity).call
+        Upsert.new(cart: @cart, product: @product, quantity: quantity).call
       end
 
       test "returns failure when quantity is invalid" do
-        response = Manager.new(cart: @cart, product: @product, quantity: "invalid").call
+        response = Upsert.new(cart: @cart, product: @product, quantity: "invalid").call
 
         assert response.is_a?(Response)
         assert_equal "Invalid quantity", response.value

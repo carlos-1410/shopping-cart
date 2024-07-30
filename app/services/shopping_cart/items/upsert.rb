@@ -2,7 +2,7 @@
 
 module ShoppingCart
   module Items
-    class Manager
+    class Upsert
       def initialize(cart:, product:, quantity: 0)
         @cart = cart
         @product = product

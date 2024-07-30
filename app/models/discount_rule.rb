@@ -14,6 +14,8 @@ class DiscountRule < ApplicationRecord
 
   belongs_to :product
 
+  scope :active, -> { where(status: "active") }
+
   with_options presence: true do
     validates :product
     validates :discount_type, inclusion: { in: DISCOUNT_TYPES }

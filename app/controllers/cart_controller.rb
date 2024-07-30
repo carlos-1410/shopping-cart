@@ -6,8 +6,8 @@ class CartController < ApplicationController
   end
 
   def add # rubocop:disable Metrics/AbcSize
-    response = ShoppingCart::Items::Manager.new(cart: @cart, product: product,
-                                                quantity: params[:quantity]).call
+    response = ShoppingCart::Items::Upsert.new(cart: @cart, product: product,
+                                               quantity: params[:quantity]).call
     redirect_path = params[:cart].present? ? cart_path : products_path
 
     respond_to do |format|
